@@ -14,6 +14,7 @@ This peer assessed assignment has 2 parts.
 4. Share your server.R and ui.R code on github
 
 The application must include the following:
+
 1. Some form of input (widget: textbox, radio button, checkbox, ...)
 2. Some operation on the ui input in sever.R
 3. Some reactive output displayed as a result of server calculations
@@ -22,19 +23,21 @@ The application must include the following:
 The documentation should be at the Shiny website itself. Do not post to an external link.
 The Shiny application in question is entirely up to you. However, if you're having trouble coming up with ideas, you could start from the simple prediction algorithm done in class and build a new algorithm on one of the R datasets packages. Please make the package simple for the end user, so that they don't need a lot of your prerequisite knowledge to evaluate your application. You should emphasize a simple project given the short time frame.  
 
-https://siewchoo.shinyapps.io/Developing_Data_Products_Course_Project
-
+App: https://siewchoo.shinyapps.io/Developing_Data_Products_Course_Project
+Code: https://github.com/siewchoo/09-Developing-Data-Products/tree/master/Course%20Project
 -----------------------
 ### Your Reproducible Pitch Presentation
 
 OK, you've made your shiny app, now it's time to make your pitch. You get 5 slides (inclusive of the title slide)  to pitch a your app. You're going to create a web page using Slidify or Rstudio Presenter with an html5 slide deck.
 
 Here's what you need
+
 1. 5 slides to pitch our idea done in Slidify or Rstudio Presenter
 2. Your presentation pushed to github or Rpubs
 3. A link to your github or Rpubs presentation pasted into the text box below
 
 Your presentation must satisfy the following
+
 1. It must be done in Slidify or Rstudio Presenter
 2. It must be 5 pages
 3. It must be hosted on github or Rpubs
@@ -48,4 +51,5 @@ Rstudio presenter has a button to publish directly to Rpubs https://support.rstu
 
 You can also publish using both formats to github manually using gh-pages, though your github branch must have a .nojekyll fle and be on a branch names gh-pages. There's more on gh-pages here https://pages.github.com/  and there is a video lecture outlining how to do this.
 
-http://rpubs.com/siewchoo/94215
+Presentation: http://rpubs.com/siewchoo/94215
+Code: https://github.com/siewchoo/09-Developing-Data-Products/tree/master/Course%20Project
