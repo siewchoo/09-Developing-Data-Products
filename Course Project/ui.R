@@ -1,33 +1,31 @@
-## Load the required libraries and data
-library(xlsx)
-library(shiny)
-library(ggplot2)
-
-
-## Define UI for application that plots random distributions
-shinyUI(pageWithSidebar(
-    ## Application title
-    headerPanel("PSLE Results"),
+shinyUI(
     
-    ## Sidebar with a slider input for number of observations
-    sidebarPanel (
-        helpText("Create bar charts with information
-                 from the Ministry of Education of Singapore."),
-        
-        uiOutput("year"),
-        
-        radioButtons("ethnicAll", "Display all ethnic options", choices=list("Yes", "No, I'll choose")),
-        conditionalPanel(
-            condition = "input.ethnicAll != 'Yes'",
-            uiOutput("ethnic")
-        )
-    ),
-    
-    ## Show a plot of the generated distribution
-    mainPanel(
-        tabsetPanel(
-            tabPanel("Plot", plotOutput("plot", height="550px")),
-            tabPanel("Table", tableOutput("table"))
+    navbarPage("Performance of PSLE Students Scoring A* to C in Standard Mathematics",
+        tabPanel("App",
+            
+            sidebarPanel (
+                helpText("View charts or table entries relating to performance of Singapore primary school leavers."),
+                
+                uiOutput("year"),
+                
+                radioButtons("ethnicAll", "Display all ethnic options", choices=list("Yes", "No, I'll choose")),
+                conditionalPanel(
+                    condition = "input.ethnicAll != 'Yes'",
+                    uiOutput("ethnic")
+                )
+            ),
+            
+            mainPanel(
+                tabsetPanel(
+                    tabPanel("Plot", plotOutput("plot", height="550px")),
+                    tabPanel("Table", tableOutput("table"))
+                )
+            )
+        ),
+        tabPanel("Help",
+            mainPanel(
+                includeMarkdown("help.md")
+            )
         )
     )
-))
+)

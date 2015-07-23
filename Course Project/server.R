@@ -3,29 +3,27 @@ library(xlsx)
 library(reshape2)
 library(ggplot2)
 library(scales)
-library(shiny)
 
-
-## Download the data file.
-##url <- http://data.gov.sg/Agency_Data/MOE/0301180000000011808D.xlsx
-##download.file(url, destfile = destFilename, mode = "wb")
-
-## A read-only dataset that will load once, when Shiny starts. 
-## It will be visible across all user sessions.
+## App assumes that you have downloaded the data file
+##      http://data.gov.sg/Agency_Data/MOE/0301180000000011808D.xlsx
+## and placed it in the same directory as this script.
+## When the app starts up on the Shiny server, a read-only copy of the dataset will be loaded.
+## This happens only once and the dataset then becomes visible across all user sessions.
 psle <- read.xlsx("0301180000000011808D.xlsx", sheetIndex = 1, colIndex = 1:6, rowIndex = 3:21)
+
 psle <- psle[-1, ]                                  ## Remove redundant "Percent" row.
 colnames(psle) <- c("Year", colnames(psle)[-1])     ## Rename column 1's column names from NA to year.
 psle <- melt(psle, id="Year")                       ## Make the dataset long and narrow.
 colnames(psle) <- c("Year", "Ethnic", "Percent")    ## Tidy up the column names.
 
-psle$Year <- as.integer(psle$Year)                  ## Convert the variables to the correct type.
-psle$Percent <- as.numeric(psle$Percent)            ## Convert the variables to the correct type.
+psle$Year <- as.integer(psle$Year)                  ## Convert variable to integer.
+psle$Percent <- as.numeric(psle$Percent)            ## Convert variable to decimal.
 
-## Define server logic required to generate and plot a random distribution
 shinyServer(function(input, output, session) {
     
     ethnicOptions <- levels(psle$Ethnic)  
     
+    ## Sync the 'Ethnic option' radio buttons and checkbox selection.
     observe({
         if (input$ethnicAll == 'Yes')
             updateCheckboxGroupInput(session=session, inputId="ethnic", selected="Overall")
@@ -37,11 +35,13 @@ shinyServer(function(input, output, session) {
         }
     })
     
+    ## Contruct the 'Year' dropdown box and its selection list.
     output$year <- renderUI({
         yearOptions <- c("All", sort(unique(psle$Year)))
         selectInput("year", "Choose a year to display", yearOptions)
     })
-          
+
+    ## Construct the 'Ethnic option' checkboxes.
     output$ethnic <- renderUI({        
         checkboxGroupInput("ethnic", "Display for:", choices=ethnicOptions, selected="Overall")
     })
@@ -50,7 +50,7 @@ shinyServer(function(input, output, session) {
         if (is.null(input$year))
             return()
         
-        ## Extract the relevant observations.
+        ## Extract the relevant observations from the dataframe.
         if (grepl(input$year, "all", ignore.case=T)) {
             if (grepl(input$ethnicAll, "yes", ignore.case=T))
                 psle
@@ -65,10 +65,12 @@ shinyServer(function(input, output, session) {
         }
     })
     
+    ## Output the table entries.
     output$table <- renderTable({
         outputData()
     })
     
+    ## Output the plot.
     output$plot <- renderPlot({
         if (is.null(input$year))
             return()
@@ -85,8 +87,8 @@ shinyServer(function(input, output, session) {
                 yAxisBy <- 2
         }
         
-        ## Create the plot.
         if (grepl(input$year, "all", ignore.case=T)) {
+            ## Create line chart.
             p <- ggplot(outputData(), aes(x=Year, y=Percent, colour=Ethnic, group=Ethnic)) + 
                         geom_point(size=3)+ geom_line() +
                         scale_x_continuous(breaks=seq(min(outputData()$Year), max(outputData()$Year), by=1)) +
@@ -94,6 +96,7 @@ shinyServer(function(input, output, session) {
                         scale_y_continuous(breaks=seq(lowerLimit, upperLimit, by=yAxisBy))
         }
         else {
+            ## Create histogram.
             p <- ggplot(outputData(), aes(x=as.character(Year), y=Percent, fill=Ethnic, group=Ethnic)) + 
                         geom_bar(stat="identity", position="dodge") 
         }

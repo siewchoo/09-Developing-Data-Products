@@ -1,0 +1,26 @@
+Help
+========================================================
+
+<H4>Using the App</H4>
+
+The dataset used is a compilation of the percentage of Singapore primary school leavers scoring A* to C for standard Mathematics by the different ethnic groups across the observed years.
+
+In essence, this application is a visualization tool for this data. You will need to select
+- for which year to display (individual year between 1997 to 2013 **or** All years)
+- the ethnic group option (Malay, Chinese, Indian, Others, Overall).
+
+By default, you will be presented the resultant plot under the <code>Plot</code> tab. To look at the associated table entries, simply click on the <code>Table</code> tab.
+
+Should you have selected to plot for 'All years', a line chart will be shown. But if you have opted to display for an individual year, a histogram will be shown instead. This is true regardless of your choice for the ethnic option and is done to facilitate ease of understanding.
+
+----------------------------------------
+
+<H4>Some relevant information and terminology</H4>
+PSLE (Primary School Leaving Examination)
+- Annual national examination all Primary 6-ers (typically 12 year olds) have to sit for.
+- Standard subjects tested: English, Mother Tongue, Science and Mathematics.
+- Grading system: A* (highest grade), followed by A, B, C, D and E (lowest grade).
+
+Primary school education
+- is compulsory
+- for children from 7 years old (Primary 1) to 12 years old (Primary 6).

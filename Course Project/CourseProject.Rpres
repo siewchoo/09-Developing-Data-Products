@@ -1,0 +1,82 @@
+Performance of PSLE Students Scoring A*-C in Standard Mathematics
+========================================================
+author: Siew Choo
+date: 19 Jul 2015
+transition: rotate
+width: 1920
+height: 1080
+
+Some Background Information
+========================================================
+<br/>
+**Singapore Primary Education**
+<ul>
+    <li>Children attend primary school from 7 years old (Primary 1) to 12 years old (Primary 6).</li>
+    <li>PSLE (Primary School Leaving Examination)
+        <ul>
+            <li>Annual national examination all Primary 6-ers sit for.</li>
+            <li>Standard subjects tested: English, Mother Tongue, Science and Mathematics.</li>
+            <li>Grading system: A* (highest grade), followed by A, B, C, D and E (lowest).</li>
+        </ul>
+    </li>
+</ul>
+<br/>
+<br/>
+**Project Information**
+- [Application](https://siewchoo.shinyapps.io/Developing_Data_Products_Course_Project) enables users to visualize data with plots or tables by selecting the relevant 
+  - ethnic group option (Malay, Chinese, Indian, Others, Overall)
+  - year options (1997 to 2013 *or* All years).
+- Plot may be a line chart (plotting all years) or histograms (plotting individual year), regardless of ethnic option.
+- Dataset can be found at the [data.gov.sg portal](http://data.gov.sg/).
+
+
+Storytelling With Data
+===
+left: 30%
+
+```{r, warning=FALSE, echo=FALSE}
+library(xlsx)
+library(reshape2)
+
+psle <- read.xlsx("0301180000000011808D.xlsx", sheetIndex = 1, colIndex = 1:6, rowIndex = 3:21)
+psle <- psle[-1, ]                                  ## Remove redundant "Percent" row.
+colnames(psle) <- c("Year", colnames(psle)[-1])     ## Rename column 1's column names from NA to year.
+psle <- melt(psle, id="Year")                       ## Make the dataset long and narrow.
+colnames(psle) <- c("Year", "Ethnic", "Percent")    ## Tidy up the column names.
+
+psle$Year <- as.integer(psle$Year)                  ## Convert the variables to the correct type.
+psle$Percent <- as.numeric(psle$Percent) 
+psle[psle$Ethnic=="Overall", ]
+```
+- Not without merits: numbers give details, absolute values.
+
+***
+
+```{r, warning=FALSE, echo=FALSE, fig.width=8, fig.height=4.5, dpi=300, out.width="1000px", height="1000px"}
+library(png)
+library(grid)
+img <- readPNG("./CourseProject-figure/lineAllOverall_1.png")
+grid.raster(img)
+```
+- Gives a quick, big picture, "easy to consume".
+- Shape highlights relationships, trends and exceptions.
+- Comparatively better delivery format for an application wrt to screen real estate.
+
+
+Choice of Visualization options: Plot or Table
+========================================================
+transition: linear
+
+```{r, png=TRUE, echo=FALSE, fig.width=8, fig.height=4.5, dpi=300, out.width="1920px", height="1080px"}
+img <- readPNG("./CourseProject-figure/PlotNTable2000All.png")
+grid.raster(img)
+```
+
+When Things Get Complicated
+========================================================
+transition: linear
+
+```{r, png=TRUE, echo=FALSE, fig.width=8, fig.height=4.5, dpi=300, out.width="1920px", height="1080px"}
+img <- readPNG("./CourseProject-figure/lineAllAll.png")
+grid.raster(img)
+```
