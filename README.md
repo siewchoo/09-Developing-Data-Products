@@ -1,4 +1,4 @@
-# 09-Developing-Data-Products
+# 09_DevelopingDataProducts
 Repo for Developing Data Products module of the Coursera DSS
 
 ## Course Project Archival
@@ -24,7 +24,7 @@ The documentation should be at the Shiny website itself. Do not post to an exter
 The Shiny application in question is entirely up to you. However, if you're having trouble coming up with ideas, you could start from the simple prediction algorithm done in class and build a new algorithm on one of the R datasets packages. Please make the package simple for the end user, so that they don't need a lot of your prerequisite knowledge to evaluate your application. You should emphasize a simple project given the short time frame.  
 
 App: https://siewchoo.shinyapps.io/Developing_Data_Products_Course_Project  
-Code: https://github.com/siewchoo/09-DevelopingDataProducts/tree/master/Course%20Project
+Code: https://github.com/siewchoo/09_DevelopingDataProducts/tree/master/Course%20Project
 
 -----------------------
 ### Your Reproducible Pitch Presentation
@@ -53,4 +53,4 @@ Rstudio presenter has a button to publish directly to Rpubs https://support.rstu
 You can also publish using both formats to github manually using gh-pages, though your github branch must have a .nojekyll fle and be on a branch names gh-pages. There's more on gh-pages here https://pages.github.com/  and there is a video lecture outlining how to do this.
 
 Presentation: http://rpubs.com/siewchoo/94215  
-Code: https://github.com/siewchoo/09-DevelopingDataProducts/tree/master/Course%20Project
+Code: https://github.com/siewchoo/09_DevelopingDataProducts/tree/master/Course%20Project
